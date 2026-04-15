@@ -45,62 +45,62 @@ const ai = new GoogleGenAI({
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
 
 const prompt = `
-// You are an expert technical interviewer.
+You are an expert technical interviewer.
 
-// Return a COMPLETE interview report in STRICT JSON format.
+Return a COMPLETE interview report in STRICT JSON format.
 
-// IMPORTANT RULES:
-// - matchScore must be a number between 0 and 100
-// - title must be the job title extracted from the job description
-// - technicalQuestions MUST be an ARRAY of objects (Minimum 4 and maximum no-limit)
-// - behavioralQuestions MUST be an ARRAY of objects (Minimum 2 and maximum no-limit)
-// - skillGaps MUST be an ARRAY of objects
-// - preparationPlan MUST be an ARRAY of objects (minimun 7 days and maximum no-limit)
-// - DO NOT return plain text
-// - ONLY return valid JSON
+IMPORTANT RULES:
+- matchScore must be a number between 0 and 100
+- title must be the job title extracted from the job description
+- technicalQuestions MUST be an ARRAY of objects (Minimum 4 and maximum no-limit)
+- behavioralQuestions MUST be an ARRAY of objects (Minimum 2 and maximum no-limit)
+- skillGaps MUST be an ARRAY of objects
+- preparationPlan MUST be an ARRAY of objects (minimun 7 days and maximum no-limit)
+- DO NOT return plain text
+- ONLY return valid JSON
 
-// Required JSON format:
+Required JSON format:
 
-// {
-//  "title": "Job title",
-//  "matchScore": number,
-//  "technicalQuestions":[
-//    {
-//      "question":"...",
-//      "intention":"...",
-//      "answer":"..."
-//    }
-//  ],
-//  "behavioralQuestions":[
-//    {
-//      "question":"...",
-//      "intention":"...",
-//      "answer":"..."
-//    }
-//  ],
-//  "skillGaps":[
-//    {
-//      "skill":"...",
-//      "severity":"low | medium | high"
-//    }
-//  ],
-//  "preparationPlan":[
-//    {
-//      "day":1,
-//      "focus":"...",
-//      "tasks":["task1","task2"]
-//    }
-//  ]
-// }
+{
+ "title": "Job title",
+ "matchScore": number,
+ "technicalQuestions":[
+   {
+     "question":"...",
+     "intention":"...",
+     "answer":"..."
+   }
+ ],
+ "behavioralQuestions":[
+   {
+     "question":"...",
+     "intention":"...",
+     "answer":"..."
+   }
+ ],
+ "skillGaps":[
+   {
+     "skill":"...",
+     "severity":"low | medium | high"
+   }
+ ],
+ "preparationPlan":[
+   {
+     "day":1,
+     "focus":"...",
+     "tasks":["task1","task2"]
+   }
+ ]
+}
 
-// Resume:
-// ${resume}
+Resume:
+${resume}
 
-// Self Description:
-// ${selfDescription}
+Self Description:
+${selfDescription}
 
-// Job Description:
-// ${jobDescription}
+Job Description:
+${jobDescription}
 `;
 
 
