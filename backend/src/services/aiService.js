@@ -128,27 +128,64 @@ ${jobDescription}
 }
 
 async function generatePdfFromHtml(htmlContent) {
-    const chromium = (await import('@sparticuz/chromium')).default;
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath(),
-    headless: true,
-  })
-  const page = await browser.newPage();
-  await page.setContent(htmlContent, { waitUntil: "networkidle0" })
-
-  const pdfBuffer = await page.pdf({
-    format: "A4", margin: {
-      top: "10mm",
-      bottom: "10mm",
-      left: "10mm",
-      right: "10mm"
+  let browser;
+  try {
+    if (process.platform === 'win32') {
+      const fs = require('fs');
+      const winPaths = [
+        'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+        'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+        `${process.env.USERPROFILE}\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe`,
+        `${process.env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe`
+      ];
+      let executablePath = null;
+      for (const p of winPaths) {
+        if (fs.existsSync(p)) {
+          executablePath = p;
+          break;
+        }
+      }
+      
+      if (!executablePath) {
+        throw new Error("Google Chrome was not found in common Windows directories. Please install Google Chrome.");
+      }
+      
+      browser = await puppeteer.launch({
+        executablePath,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
+    } else {
+      const chromium = (await import('@sparticuz/chromium')).default;
+      browser = await puppeteer.launch({
+        args: chromium.args,
+        executablePath: await chromium.executablePath(),
+        headless: true,
+      });
     }
-  })
 
-  await browser.close()
+    const page = await browser.newPage();
+    await page.setContent(htmlContent, { waitUntil: "networkidle0" });
 
-  return pdfBuffer
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      margin: {
+        top: "10mm",
+        bottom: "10mm",
+        left: "10mm",
+        right: "10mm"
+      }
+    });
+
+    await browser.close();
+    return pdfBuffer;
+  } catch (error) {
+    if (browser) {
+      await browser.close();
+    }
+    console.error("Error generating PDF:", error);
+    throw error;
+  }
 }
 
 
