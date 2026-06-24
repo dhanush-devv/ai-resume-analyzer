@@ -128,7 +128,7 @@ ${jobDescription}
 }
 
 async function generatePdfFromHtml(htmlContent) {
-  const chromium = await import('@sparticuz/chromium')
+    const chromium = (await import('@sparticuz/chromium')).default;
   const browser = await puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath(),

@@ -14,7 +14,7 @@
   "dependencies": {
     "@google/genai": "^1.43.0",
     "@napi-rs/canvas": "^0.1.95",
-    "@sparticuz/chromium": "^149.0.0",
+    "@sparticuz/chromium": "^119.0.2",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
