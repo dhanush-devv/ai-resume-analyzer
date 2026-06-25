@@ -1,40 +1,44 @@
 @use "sass:color";
 // ── Shared Variables (Indigo-Blue Theme) ────────────────────────────────
-$bg-page:        #080c14;
-$bg-card:        #0e1322;
-$bg-panel:       #151b2e;
-$bg-input:       #1a2035;
-$border-color:   rgba(255, 255, 255, 0.08);
-$border-hover:   rgba(255, 255, 255, 0.16);
-$text-primary:   #f8fafc;
-$text-muted:     #94a3b8;
-$accent:         #6366f1;
-$font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+$bg-page: #080c14;
+$bg-card: #0e1322;
+$bg-panel: #151b2e;
+$bg-input: #1a2035;
+$border-color: rgba(255, 255, 255, 0.08);
+$border-hover: rgba(255, 255, 255, 0.16);
+$text-primary: #f8fafc;
+$text-muted: #94a3b8;
+$accent: #6366f1;
+$font-stack: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
 // severity palette
-$severity-high:   #ef4444;
+$severity-high: #ef4444;
 $severity-medium: #f59e0b;
-$severity-low:    #10b981;
+$severity-low: #10b981;
 
 *::-webkit-scrollbar {
     width: 6px;
 }
+
 *::-webkit-scrollbar-track {
     background: transparent;
 }
+
 *::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
 }
+
 *::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
 .interview-wrapper {
     width: 100%;
-    min-height: 100vh;
+   min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 // ── Page Shell ────────────────────────────────────────────────────────────────
@@ -46,23 +50,21 @@ $severity-low:    #10b981;
     font-family: $font-stack;
     display: flex;
     align-items: stretch;
-    padding: 2rem 1.5rem;
+    padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 // ── 3-Column Layout ───────────────────────────────────────────────────────────
 .interview-layout {
     display: flex;
     width: 100%;
-    max-width: 1280px;
+    max-width: 100%;
     margin: 0 auto;
-    height: calc(100vh - 7.5rem);
+    height: 100%;
     background-color: $bg-card;
-    border: 1px solid $border-color;
-    border-radius: 1rem;
     justify-content: space-between;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
 .interview-divider {
@@ -81,7 +83,7 @@ $severity-low:    #10b981;
     justify-content: space-between;
     gap: 1.5rem;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 
     .nav-content {
         display: flex;
@@ -192,6 +194,7 @@ $severity-low:    #10b981;
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
+    scroll-behavior: auto;
     overflow-anchor: none;
     height: 100%;
     background-color: rgba(8, 12, 20, 0.2);
@@ -414,8 +417,15 @@ $severity-low:    #10b981;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 // ── Road Map ──────────────────────────────────────────────────────────────────
@@ -448,7 +458,7 @@ $severity-low:    #10b981;
     &::before {
         content: '';
         position: absolute;
-        left: 22px;
+        left: 23px;
         top: 0.95rem;
         width: 12px;
         height: 12px;
@@ -506,7 +516,7 @@ $severity-low:    #10b981;
 
         &:hover {
             background-color: rgba(255, 255, 255, 0.03);
-            
+
             .roadmap-task-checkbox {
                 border-color: rgba($accent, 0.6);
             }
@@ -557,7 +567,7 @@ $severity-low:    #10b981;
     flex-direction: column;
     gap: 2rem;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .sidebar-divider {
@@ -679,7 +689,7 @@ $severity-low:    #10b981;
         color: $severity-high;
         background-color: rgba($severity-high, 0.06);
         border-color: rgba($severity-high, 0.15);
-        
+
         .bullet-indicator {
             background-color: $severity-high;
         }
@@ -689,7 +699,7 @@ $severity-low:    #10b981;
         color: $severity-medium;
         background-color: rgba($severity-medium, 0.06);
         border-color: rgba($severity-medium, 0.15);
-        
+
         .bullet-indicator {
             background-color: $severity-medium;
         }
@@ -699,7 +709,7 @@ $severity-low:    #10b981;
         color: $severity-low;
         background-color: rgba($severity-low, 0.06);
         border-color: rgba($severity-low, 0.15);
-        
+
         .bullet-indicator {
             background-color: $severity-low;
         }
@@ -708,12 +718,21 @@ $severity-low:    #10b981;
 
 // ── Tablet (≤1024px) ─────────────────────────────────────────
 @media (max-width: 1024px) {
+    .interview-wrapper {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
     .interview-page {
-        padding: 1rem;
+        padding: 0;
+        overflow: visible;
     }
 
     .interview-layout {
         flex-direction: column;
+        height: auto;
+        overflow: visible;
     }
 
     .interview-divider {
@@ -722,9 +741,11 @@ $severity-low:    #10b981;
 
     .interview-nav {
         width: 100%;
+        height: auto;
         flex-direction: column;
         padding: 1.25rem 1.25rem 0.5rem;
         gap: 1rem;
+        overflow-y: visible;
 
         .home-btn {
             margin-bottom: 0.75rem;
@@ -774,19 +795,23 @@ $severity-low:    #10b981;
 
     .interview-content {
         max-height: none;
+        height: auto;
         padding: 1.5rem;
+        overflow-y: visible;
     }
 
     .interview-sidebar {
         width: 100%;
+        height: auto;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         padding: 1.5rem;
         border-top: 1px solid $border-color;
         gap: 1.5rem;
+        overflow-y: visible;
 
-        & > div {
+        &>div {
             flex: 1;
         }
 
@@ -796,7 +821,7 @@ $severity-low:    #10b981;
 
         .match-score-section {
             align-items: center;
-            
+
             &__label {
                 align-self: center;
             }
@@ -807,11 +832,11 @@ $severity-low:    #10b981;
 // ── Mobile (≤768px) ─────────────────────────────────────────
 @media (max-width: 768px) {
     .interview-page {
-        padding: 0.5rem;
+        padding: 0;
     }
 
     .interview-layout {
-        border-radius: 0.75rem;
+        border-radius: 0;
     }
 
     .interview-nav {
@@ -831,7 +856,7 @@ $severity-low:    #10b981;
     }
 
     .roadmap-day::before {
-        left: 17px;
+        left: 15px;
     }
 
     .interview-sidebar {

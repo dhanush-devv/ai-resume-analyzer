@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../style/interview.scss'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
@@ -127,6 +127,7 @@ const Interview = () => {
     const navigate = useNavigate()
 
     const [checkedTasks, setCheckedTasks] = useState({})
+    const contentRef = useRef(null)
 
     // Load persistent checklist state for this report
     useEffect(() => {
@@ -152,14 +153,25 @@ const Interview = () => {
 
     // Scroll back to top on tab change so roadmap or long lists don't start scrolled down
     useEffect(() => {
-        const contentEl = document.querySelector('.interview-content')
-        if (contentEl) {
-            const timer = setTimeout(() => {
-                contentEl.scrollTop = 0
+        if (contentRef.current) {
+            contentRef.current.scrollTop = 0
+            // Fallbacks to handle asynchronous rendering/painting across layout updates
+            const t1 = setTimeout(() => {
+                if (contentRef.current) contentRef.current.scrollTop = 0
             }, 0)
-            return () => clearTimeout(timer)
+            const t2 = setTimeout(() => {
+                if (contentRef.current) contentRef.current.scrollTop = 0
+            }, 50)
+            const t3 = setTimeout(() => {
+                if (contentRef.current) contentRef.current.scrollTop = 0
+            }, 150)
+            return () => {
+                clearTimeout(t1)
+                clearTimeout(t2)
+                clearTimeout(t3)
+            }
         }
-    }, [ activeNav ])
+    }, [ activeNav, report ])
 
     const toggleTask = (dayIndex, taskIndex) => {
         const key = `${dayIndex}-${taskIndex}`
@@ -239,7 +251,7 @@ const Interview = () => {
                     <div className='interview-divider' />
 
                     {/* ── Center Content ── */}
-                    <main className='interview-content'>
+                    <main ref={contentRef} className='interview-content'>
                         {activeNav === 'technical' && (
                             <section>
                                 <div className='content-header'>

@@ -1,19 +1,19 @@
 @use "sass:color";
 // ── Variables (Updated to match Indigo-Blue Premium Theme) ───────────────────
-$bg-page:        #080c14;
-$bg-card:        #0e1322;
-$bg-panel:       #151b2e;
-$bg-input:       #1a2035;
-$border-color:   rgba(255, 255, 255, 0.08);
-$text-primary:   #f8fafc;
-$text-muted:     #94a3b8;
-$accent:         #6366f1; // Indigo-500
-$accent-alt:     #3b82f6; // Blue-500
+$bg-page: #080c14;
+$bg-card: #0e1322;
+$bg-panel: #151b2e;
+$bg-input: #1a2035;
+$border-color: rgba(255, 255, 255, 0.08);
+$text-primary: #f8fafc;
+$text-muted: #94a3b8;
+$accent: #6366f1; // Indigo-500
+$accent-alt: #3b82f6; // Blue-500
 $badge-required: #ef4444; // Red for required
-$badge-best:     #10b981; // Green for best
-$info-bg:        rgba(59, 130, 246, 0.04);
-$info-border:    rgba(59, 130, 246, 0.15);
-$font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+$badge-best: #10b981; // Green for best
+$info-bg: rgba(59, 130, 246, 0.04);
+$info-border: rgba(59, 130, 246, 0.15);
+$font-stack: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
 // ── Wrapper and Page Shell ──────────────────────────────────────────────────
 .home-wrapper {
@@ -152,7 +152,9 @@ $font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 // ── Page Header ──────────────────────────────────────────────────────────────
@@ -597,7 +599,7 @@ $font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             transform: translateY(-3px);
             border-color: rgba(99, 102, 241, 0.3);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-            
+
             &::before {
                 opacity: 1;
             }
@@ -650,11 +652,13 @@ $font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
                 background-color: rgba(16, 185, 129, 0.12);
                 border: 1px solid rgba(16, 185, 129, 0.25);
             }
+
             &.score--mid {
                 color: #f59e0b;
                 background-color: rgba(245, 158, 11, 0.12);
                 border: 1px solid rgba(245, 158, 11, 0.25);
             }
+
             &.score--low {
                 color: #ef4444;
                 background-color: rgba(239, 68, 68, 0.12);
@@ -725,111 +729,111 @@ $font-stack:     'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
 @media (max-width: 768px) {
 
-  .home-page {
-    padding: 2rem 1rem;
-  }
-
-  .page-header {
-    h1 {
-      font-size: 1.8rem;
+    .home-page {
+        padding: 2rem 1rem;
     }
 
-    p {
-      font-size: 0.85rem;
-    }
-  }
+    .page-header {
+        h1 {
+            font-size: 1.8rem;
+        }
 
-  .steps-section {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-inline: 1rem;
-
-    .step-card {
-      width: 100%;
-      padding: 0.85rem 1rem;
+        p {
+            font-size: 0.85rem;
+        }
     }
 
-    .step-arrow {
-      display: none;
-    }
-  }
+    .steps-section {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding-inline: 1rem;
 
-  .interview-card {
+        .step-card {
+            width: 100%;
+            padding: 0.85rem 1rem;
+        }
 
-    border-radius: 0.75rem;
-
-    &__body {
-      flex-direction: column;   // 🔥 stack panels
-    }
-
-    &__footer {
-      flex-direction: column;
-      gap: 1rem;
-      align-items: stretch;
-
-      .footer-info {
-        text-align: center;
-      }
-
-      .generate-btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  }
-
-  /* Remove vertical divider on mobile */
-  .panel-divider {
-    display: none;
-  }
-
-  .panel {
-    padding: 1rem;
-
-    &--left {
-      .char-counter {
-        position: static;
-        text-align: right;
-        margin-top: -0.5rem;
-      }
+        .step-arrow {
+            display: none;
+        }
     }
 
-    &__textarea {
-      min-height: 180px;
+    .interview-card {
+
+        border-radius: 0.75rem;
+
+        &__body {
+            flex-direction: column; // 🔥 stack panels
+        }
+
+        &__footer {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+
+            .footer-info {
+                text-align: center;
+            }
+
+            .generate-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     }
 
-    &__textarea--short {
-      height: 120px;
-    }
-  }
-
-  .dropzone {
-    padding: 1.25rem 1rem;
-
-    &__title {
-      font-size: 0.8rem;
-      text-align: center;
+    /* Remove vertical divider on mobile */
+    .panel-divider {
+        display: none;
     }
 
-    &__subtitle {
-      font-size: 0.7rem;
-      text-align: center;
+    .panel {
+        padding: 1rem;
+
+        &--left {
+            .char-counter {
+                position: static;
+                text-align: right;
+                margin-top: -0.5rem;
+            }
+        }
+
+        &__textarea {
+            min-height: 180px;
+        }
+
+        &__textarea--short {
+            height: 120px;
+        }
     }
-  }
 
-  .recent-reports {
-    .reports-list {
-      flex-direction: column;
+    .dropzone {
+        padding: 1.25rem 1rem;
 
-      .report-item {
-        width: 100%;
-      }
+        &__title {
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        &__subtitle {
+            font-size: 0.7rem;
+            text-align: center;
+        }
     }
-  }
 
-  .page-footer {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
+    .recent-reports {
+        .reports-list {
+            flex-direction: column;
+
+            .report-item {
+                width: 100%;
+            }
+        }
+    }
+
+    .page-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
 }
